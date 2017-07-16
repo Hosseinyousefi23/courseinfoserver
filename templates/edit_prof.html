@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Edit Prof</title>
+{% endblock %}
+{% block body %}
+    <form action="{% url 'course:edit_prof' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="prof_id" value="{{ id }}">
+        <input type="submit" value="submit"/>
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Students</title>
+    <link rel="stylesheet" href="{% static 'css/list.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/students.js' %}"></script>
+{% endblock %}
+{% block body %}
+    <img id="search_img" src="{% static 'image/search.png' %}">
+    <input type="text" id="search_student"/>
+    <br style="clear: both"/>
+    <ul id="student_list">
+        {% for student in students %}
+            <li>
+                <a href="{% url 'course:edit_student' %}?id={{ student.id }}">{{ student.first_name|add:' '|add:student.last_name }}</a>
+                <span><a href="{% url 'course:delete_student' %}?id={{ student.id }}">&#10060;</a></span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'course:add_student' %}">Add student</a>
+{% endblock %}

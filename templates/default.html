@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title_source_link %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/default.css' %}"/>
+</head>
+<body>
+<div class="topnav" id="myTopnav">
+    <a href="{% url 'course:main_page' %}">Home</a>
+    <a href="{% url 'course:students' %}">Students</a>
+    <a href="{% url 'course:profs' %}">Profs</a>
+    <a href="{% url 'course:courses' %}">Courses</a>
+</div>
+{% block body %}
+{% endblock %}
+</body>
+</html>

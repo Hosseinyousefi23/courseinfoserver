@@ -1,0 +1,18 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Profs</title>
+    <link rel="stylesheet" href="{% static 'css/profs.css' %}"/>
+{% endblock %}
+{% block body %}
+    <ul>
+        {% for prof in profs %}
+            <li>
+                <a href="{% url 'course:edit_prof' %}?id={{ prof.id }}">{{ prof.first_name|add:' '|add:prof.last_name }}</a>
+                <span><a href="{% url 'course:delete_prof' %}?id={{ prof.id }}">&#10060;</a></span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'course:add_prof' %}">Add prof</a>
+{% endblock %}

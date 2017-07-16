@@ -1,0 +1,11 @@
+{% extends 'default.html' %}
+{% block title_source_link %}
+    <title>Add student</title>
+{% endblock %}
+{% block body %}
+    <form action="{% url 'course:add_student' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="submit"/>
+    </form>
+{% endblock %}

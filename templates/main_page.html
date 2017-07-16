@@ -1,0 +1,24 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Main page</title>
+    <link href="{% static 'css/main_page.css' %}"/>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="summary">
+            <div class="student_smry">
+                <a href="{% url 'course:students' %}">Students</a>
+                <span class="count">({{ student_count }})</span>
+            </div>
+            <div class="prof_smry">
+                <a href="{% url 'course:profs' %}">Profs</a>
+                <span class="count">({{ prof_count }})</span>
+            </div>
+            <div class="course_smry">
+                <a href="{% url 'course:courses' %}">Courses</a>
+                <span class="count">({{ course_count }})</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
