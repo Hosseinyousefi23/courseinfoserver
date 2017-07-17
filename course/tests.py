@@ -1,3 +1,79 @@
 from django.test import TestCase
+from django.test.client import Client
 
-# Create your tests here.
+from course.models import Student
+
+
+class StudentTestCase(TestCase):
+    def setUp(self):
+        ali = Student.objects.create(first_name='ali', last_name='alavi', student_number='92100715',
+                                     national_code='0019154356')
+        reza = Student.objects.create(first_name='reza', last_name='bani', student_number='92100772',
+                                      national_code='0019154123')
+
+    def test_add_student_form(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get("add_student/")
+        self.assertIs(response.status_code, 404)
+
+    def test_add_student(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.post('/add_student/',
+                                    {'first_name': 'mamad', 'last_name': 'rezaie', 'student_number': '92100773',
+                                     'national_code': '0019154122'})
+        self.assertIs(response.status_code, 404)
+
+    def test_add_prof_form(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get("add_prof/")
+        self.assertIs(response.status_code, 404)
+
+    def test_add_prof(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.post('/add_prof/',
+                                    {'first_name': 'mamad', 'last_name': 'rezaie'})
+        self.assertIs(response.status_code, 404)
+
+    def test_add_course_form(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get("add_course/")
+        self.assertIs(response.status_code, 404)
+
+    def test_add_course(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.post('/add_course/',
+                                    {'name': 'riazi', 'prof': 'Kasra Alishahi', 'students': 'mamad rezaie, reza bani'})
+        self.assertIs(response.status_code, 404)
+
+    def test_remove_student(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/remove_student/',
+                                    {'id': '1'})
+        self.assertIs(response.status_code, 404)
+
+    def test_remove_prof(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/remove_student/',
+                                    {'id': '1'})
+        self.assertIs(response.status_code, 404)
+
+    def test_remove_course(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/remove_student/',
+                                    {'id': '1'})
+        self.assertIs(response.status_code, 404)
+
+    def test_list_students(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/students/', {})
+        self.assertIs(response.status_code, 404)
+
+    def test_list_profs(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/profs/', {})
+        self.assertIs(response.status_code, 404)
+
+    def test_list_courses(self):
+        self.client = Client(enforce_csrf_checks=False)
+        response = self.client.get('/courses/', {})
+        self.assertIs(response.status_code, 404)
