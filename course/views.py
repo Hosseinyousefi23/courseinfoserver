@@ -1,5 +1,6 @@
 from django.core.serializers import serialize
-
+from django.db.models.expressions import Value
+from django.db.models.functions.base import Concat
 from django.http.response import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render
 from django.urls.base import reverse
@@ -127,9 +128,12 @@ def search(request):
         courses = Course.objects.filter(name__contains=request.GET['course'])
         return JsonResponse({'courses': serialize('json', courses)})
     elif 'prof' in request.GET:
-        pass
+        profs = Prof.objects.annotate(full_name=Concat('first_name', Value(' '), 'last_name')).filter(
+            full_name__contains=request.GET['prof'])
+        return JsonResponse({'profs': serialize('json', profs)})
     elif 'student' in request.GET:
-        students = Student.objects.filter(first_name__contains=request.GET['student'])
-        return JsonResponse({'courses': serialize('json', students)})
+        students = Student.objects.annotate(full_name=Concat('first_name', Value(' '), 'last_name')).filter(
+            full_name__contains=request.GET['student'])
+        return JsonResponse({'students': serialize('json', students)})
     else:
         return Http404('not found')

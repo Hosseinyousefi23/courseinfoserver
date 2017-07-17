@@ -4,7 +4,7 @@ $(document).ready(function () {
         $.ajax({
             url: '/search?student=' + searchBar.val(),
             success: function (result) {
-                var validStudents = JSON.parse(result['courses']);
+                var validStudents = JSON.parse(result['students']);
                 console.log(validStudents);
                 var studentList = $('#student_list li');
                 outer: for (var i = 0; i < studentList.length; i++) {

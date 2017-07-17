@@ -2,14 +2,22 @@
 {% load static %}
 {% block title_source_link %}
     <title>Profs</title>
-    <link rel="stylesheet" href="{% static 'css/profs.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/list.css' %}"/>
+    <link rel="stylesheet" href="{% static  'css/list_style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/profs.js' %}"></script>
 {% endblock %}
 {% block body %}
-    <ul>
+    <img id="search_img" src="{% static 'image/search.png' %}">
+    <input type="text" id="search_prof"/>
+    <br style="clear: both"/>
+    <ul id="prof_list" class="w3-ul w3-card-4">
         {% for prof in profs %}
-            <li>
+            <li class="w3-display-container">
                 <a href="{% url 'course:edit_prof' %}?id={{ prof.id }}">{{ prof.first_name|add:' '|add:prof.last_name }}</a>
-                <span><a href="{% url 'course:delete_prof' %}?id={{ prof.id }}">&#10060;</a></span>
+                <a href="{% url 'course:delete_prof' %}?id={{ prof.id }}"><span
+                        class="w3-button w3-transparent w3-display-right">&#10060;</span></a>
+
             </li>
         {% endfor %}
     </ul>
