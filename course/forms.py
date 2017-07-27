@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from course.models import Student, Prof, Course
+from course.models import Student, Prof, Course, Question, Exam
 
 
 class StudentForm(ModelForm):
@@ -19,3 +19,15 @@ class CourseForm(ModelForm):
     class Meta:
         model = Course
         fields = '__all__'
+
+
+class QuestionForm(ModelForm):
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+
+class ExamForm(ModelForm):
+    class Meta:
+        model = Exam
+        exclude = ['questions', 'saved']

@@ -1,0 +1,33 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Show exam</title>
+    <link rel="stylesheet" href="{% static 'css/show_exam.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/show_exam.js' %}"></script>
+{% endblock %}
+{% block body %}
+    <div id="question_container">
+        {% for question in questions %}
+            <div class="question">
+                <h3 class="question_header">Question {{ forloop.counter }}</h3>
+
+                <p class="question_face">{{ question.question_face }}</p>
+                <ol class="choices">
+                    <li class="choice">{{ question.first_choice }}</li>
+                    <li class="choice">{{ question.second_choice }}</li>
+                    <li class="choice">{{ question.third_choice }}</li>
+                    <li class="choice">{{ question.fourth_choice }}</li>
+                </ol>
+            </div>
+        {% endfor %}
+    </div>
+    {% if not exam.saved %}
+        <a href="{% url 'course:save_exam' %}?id={{ exam.id }}">
+            <button>Save</button>
+        </a>
+    {% endif %}
+    <div id="editor"></div>
+    <button onclick="savePDF(event)">Save as PDF</button>
+{% endblock %}

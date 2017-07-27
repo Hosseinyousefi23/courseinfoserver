@@ -19,6 +19,14 @@
                 <a href="{% url 'course:courses' %}">Courses</a>
                 <span class="count">({{ course_count }})</span>
             </div>
+            <div class="smry">
+                <a href="{% url 'course:questions' %}">Questions</a>
+                <span class="count">({{ question_count }})</span>
+            </div>
+            <div class="smry">
+                <a href="{% url 'course:exams' %}">Exams</a>
+                <span class="count">({{ exam_count }})</span>
+            </div>
         </div>
     </div>
 {% endblock %}

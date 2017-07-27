@@ -1,0 +1,30 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Questions</title>
+    <link rel="stylesheet" href="{% static 'css/list.css' %}"/>
+    <link rel="stylesheet" href="{% static  'css/list_style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/questions.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/questions.js' %}"></script>
+{% endblock %}
+{% block body %}
+    <div class="tab">
+        {% for course in courses %}
+            <button class="tablinks" onclick="showQuestions(event, {{ course.id }})">{{ course.name }}</button>
+        {% endfor %}
+
+    </div>
+
+    <div class="tabcontent">
+        <ul id="question_list" class="w3-ul w3-card-4">
+            {% for question in questions %}
+                <li class="w3-display-container {{ question.course.id }}">
+                    <a href="{% url 'course:edit_question' %}?id={{ question.id }}">Question {{ question.id }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'course:add_question' %}">Add question</a>
+{% endblock %}

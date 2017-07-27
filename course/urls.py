@@ -21,6 +21,16 @@ urlpatterns = \
         url(r'^delete_prof$', views.delete_prof, name='delete_prof'),
         url(r'^delete_course$', views.delete_course, name='delete_course'),
         url(r'^search$', views.search, name='search'),
+        url(r'^questions$', views.questions, name='questions'),
+        url(r'^add_question$', views.add_question, name='add_question'),
+        url(r'^edit_question$', views.edit_question, name='edit_question'),
+        url(r'^delete_question$', views.delete_question, name='delete_question'),
+        url(r'^exams$', views.exams, name='exams'),
+        url(r'^add_exam$', views.add_exam, name='add_exam'),
+        url(r'^delete_exam$', views.delete_exam, name='delete_exam'),
+        url(r'^show_exam$', views.show_exam, name='show_exam'),
+        url(r'^save_exam$', views.save_exam, name='save_exam'),
+
 
     ]
 

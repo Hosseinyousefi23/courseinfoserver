@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+{% load static %}
+{% block title_source_link %}
+    <title>Exams</title>
+    <link rel="stylesheet" href="{% static 'css/list.css' %}"/>
+    <link rel="stylesheet" href="{% static  'css/list_style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/exams.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="application/javascript" src="{% static 'js/exams.js' %}"></script>
+{% endblock %}
+{% block body %}
+    <div class="tab">
+        {% for course in courses %}
+            <button class="tablinks" onclick="showExams(event, {{ course.id }})">{{ course.name }}</button>
+        {% endfor %}
+
+    </div>
+
+    <div class="tabcontent">
+        <ul id="exam_list" class="w3-ul w3-card-4">
+            {% for exam in exams %}
+                <li class="w3-display-container {{ exam.course.id }}">
+                    <a href="{% url 'course:show_exam' %}?id={{ exam.id }}">Exam {{ exam.id }}</a>
+                    <a href="{% url 'course:delete_exam' %}?id={{ exam.id }}"><span
+                            class="w3-button w3-transparent w3-display-right">&#10060;</span></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'course:add_exam' %}">Add exam</a>
+{% endblock %}
